@@ -1,0 +1,163 @@
+
+:root {
+    --color-dark: #1a120b;
+    --color-medium: #3c2a21;
+    --color-light: #e5e5cb;
+    --color-accent: #d5cea3;
+    --color-gold: #b89146;
+    --color-gold-light: #d6ae67;
+}
+
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+
+    
+    background: linear-gradient(rgba(164, 106, 74, 0.7), rgba(204, 137, 103, 0.7)),
+                url("https://e1.pxfuel.com/desktop-wallpaper/6/984/desktop-wallpaper-backgrounds-for-coffee-shop-summer-and-coffee.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+
+.admin-header { 
+    background: linear-gradient(90deg,var(--color-medium),var(--color-dark)); 
+    padding:1.5rem; 
+    color:#fff; 
+    text-align: center;
+}
+
+
+.login, .login-card {
+    max-width: 400px;
+    margin: 3rem auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+.login h2, .login-card h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--color-dark);
+}
+.login label, .login-card label {
+    font-weight: 600;
+    margin-top: 0.8rem;
+    display: block;
+}
+.login input, .login select,
+.login-card input, .login-card select {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.3rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+.login button, .login-card .btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 6px;
+    background: var(--color-gold);
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.login button:hover, .login-card .btn:hover {
+    background: var(--color-gold-light);
+}
+
+
+.back-btn-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+.btn-back {
+    background: transparent;
+    border: 1px solid var(--color-dark);
+    color: var(--color-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn-back:hover {
+    background: var(--color-dark);
+    color: #fff;
+}
+
+
+.dashboard-layout {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+.admin-sidebar { 
+    background: linear-gradient(180deg,var(--color-medium),var(--color-dark)); 
+    color:#fff; 
+    padding:1.25rem; 
+    border-radius:12px; 
+    width: 220px;
+    height: fit-content;
+}
+.admin-content { 
+    background:#fff; 
+    border-radius:12px; 
+    padding:1.5rem; 
+    flex: 1;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06); 
+}
+.text-gold { color:var(--color-gold); }
+
+.btn-transparent {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.25rem;
+    border-radius: 6px;
+    width: 100%;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-transparent:hover, .btn-transparent.active {
+    background-color: rgba(255,255,255,0.1);
+}
+
+
+.section { display: none; }
+.section.active { display: block; }
+.small-muted { color: rgba(0,0,0,0.6); }
+
+
+footer {
+    background: #3b2f2f;
+    padding: 1rem;
+    text-align: center;
+    color: #ccc;
+    margin-top: 2rem;
+}
+footer strong {
+    color: var(--color-gold);
+}
+a {
+  color: black !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+
+@media (max-width: 991px) {
+    .dashboard-layout { flex-direction: column; }
+    .admin-sidebar { width: 100%; }
+}

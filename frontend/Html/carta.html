@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta - Coffe De Ronel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../CSS/styleCarta.css">
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+</head>
+<body class="bg-custom-dark">
+  
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="Inicio.html">
+        <img src="https://scontent-lim1-1.xx.fbcdn.net/v/t39.30808-6/294357829_551928999829089_8117598565221584254_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=jFLrrOm6EqUQ7kNvwFSuiCT&_nc_oc=Adn2HjrdECyKwkoyiGasNBFjjenxhu7GtJCM6IuUP-mBCJaJqxV0tZsNnu77RRpPW9w&_nc_zt=23&_nc_ht=scontent-lim1-1.xx&_nc_gid=tZngwqTfnIb-5ObG49-KEA&oh=00_AfZ6vnQejEBjr27_kX0S-gFPBfyUqD2etXbVwxDFsXS_bA&oe=68DBBAF2" alt="Logo" width="40" height="40" class="me-2">
+        COFFE D'RONEL
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="Inicio.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="carta.html">Productos</a></li>
+          <li class="nav-item me-3">
+            <a class="nav-link position-relative" href="#" id="cart-icon" data-bs-toggle="offcanvas" data-bs-target="#carrito">
+              <i class="bi bi-cart3"></i>
+              <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="bi bi-person-circle"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="#" data-action="login"></a></li>
+              <li><a class="dropdown-item" href="#" data-action="register">Registrarse</a></li>
+              <li><a class="dropdown-item" href="admin.html" data-action="admin">Iniciar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ 
+  <section class="container my-5 py-4">
+    <div class="row">
+      
+      <div class="col-md-3 mb-4" style="margin-top: 70px;">
+        <h5 class="text-gold">Filtrar por Categoría</h5>
+        <select class="form-select" id="categoryFilter" onchange="filterProducts()">
+          <option value="all">Todos</option>
+          <option value="cafe">Café</option>
+          <option value="postres">Postres</option>
+          <option value="bebidas">Bebidas Frías</option>
+          <option value="sandwiches">Sandwiches</option>
+        </select>
+        <h5 class="text-gold mt-4">Filtrar por Precio</h5>
+        <select class="form-select" id="priceFilter" onchange="filterProducts()">
+          <option value="all">Todos</option>
+          <option value="low">Hasta S/ 10</option>
+          <option value="medium">S/ 10 - S/ 20</option>
+          <option value="high">Más de S/ 20</option>
+        </select>
+      </div>
+    
+      <div class="col-md-9">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <h2 class="fw-bold display-5 mb-0 text-gold">Nuestros Productos</h2>
+          <div id="loading-products" class="spinner-border text-warning" style="display: none;"></div>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="productList">
+         
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer class="py-4">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="mb-1"><strong>Dirección:</strong> San Martín de Porres 15109, Lima</p>
+          <p class="mb-1"><strong>Horario:</strong> Lun-Dom: 10:00 am - 22:00 pm</p>
+          <p class="mb-0"><strong>Teléfono:</strong> <a href="tel:+51902280036" class="text-gold">+51 902 280 036</a>
+          </p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <div class="social-icons mb-2">
+            <a href="https://wa.me/51902280036" class="text-gold me-3" target="_blank">
+              <i class="bi bi-whatsapp fs-5"></i>
+            </a>
+            <a href="#" class="text-gold me-3">
+              <i class="bi bi-facebook fs-5"></i>
+            </a>
+            <a href="#" class="text-gold me-3">
+              <i class="bi bi-instagram fs-5"></i>
+            </a>
+            <a href="#" class="text-gold">
+              <i class="bi bi-tiktok fs-5"></i>
+            </a>
+          </div>
+          <p class="mb-0 small">© 2025 Cafetería D'Ronel - Todos los derechos reservados</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/51902280036" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+  </a>
+  
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="carrito" aria-labelledby="carritoLabel">
+    <div class="offcanvas-header">
+      <h5 id="carritoLabel" class="text-gold">
+        <i class="bi bi-cart3 me-2"></i>Mi Carrito
+      </h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="carrito-vacio" class="text-center py-4">
+        <i class="bi bi-cart-x display-1 text-muted"></i>
+        <p class="text-muted mt-3">Tu carrito está vacío</p>
+        <a href="carta.html" class="btn btn-warning">Ver Productos</a>
+      </div>
+      <div id="carrito-contenido" style="display: none;">
+        <ul id="lista-carrito" class="list-group mb-3">
+          
+        </ul>
+        <div class="d-flex justify-content-between align-items-center mb-3 p-3 bg-light rounded">
+          <strong>Total:</strong>
+          <span id="total" class="h5 mb-0 text-gold">S/ 0.00</span>
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-success" id="finalizar-compra">
+            <i class="bi bi-check-circle me-2"></i>Finalizar Compra
+          </button>
+          <button class="btn btn-outline-danger" id="vaciar-carrito">
+            <i class="bi bi-trash me-2"></i>Vaciar Carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-gold">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="loginEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="loginPassword" required>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-warning">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <small class="text-muted">¿No tienes cuenta?
+            <a href="#" class="text-gold" data-bs-toggle="modal" data-bs-target="#registerModal"
+              data-bs-dismiss="modal">Regístrate aquí</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-gold">
+            <i class="bi bi-person-plus me-2"></i>Crear Cuenta
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="registerForm">
+            <div class="mb-3">
+              <label for="registerName" class="form-label">Nombre completo</label>
+              <input type="text" class="form-control" id="registerName" required>
+            </div>
+            <div class="mb-3">
+              <label for="registerEmail" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="registerEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="registerPassword" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="registerPassword" required minlength="6">
+            </div>
+            <div class="mb-3">
+              <label for="registerConfirm" class="form-label">Confirmar contraseña</label>
+              <input type="password" class="form-control" id="registerConfirm" required>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-warning">
+                <i class="bi bi-person-plus me-2"></i>Registrarse
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <small class="text-muted">¿Ya tienes cuenta?
+            <a href="#" class="text-gold" data-bs-toggle="modal" data-bs-target="#loginModal"
+              data-bs-dismiss="modal">Inicia sesión aquí</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="toast-producto" class="toast" role="alert">
+      <div class="toast-header">
+        <i class="bi bi-cart-check-fill text-success me-2"></i>
+        <strong class="me-auto">Producto añadido</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+      </div>
+      <div class="toast-body" id="toast-message"></div>
+    </div>
+  </div>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ 
+  <script src="../JS/Carta.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+        :root {
+            --color-dark: #2c1e1f;
+            --color-medium: #5c4a37;
+            --color-light: #f1f1f1;
+            --color-gold: #f3b13c;
+            --color-primary: #6b4c3b;
+            --color-accent: #8b5e4b;
+            --color-light-hover: #d4a574;
+            --color-table-header: #6b4c3b;
+            --color-table-row: #3a2a1e;
+            --color-table-hover: #5a3b2f;
+        }
+
+        body {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: var(--color-dark);
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .sidebar .nav-link {
+            font-size: 1.1rem;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--color-medium);
+            transition: all 0.3s ease;
+            color: var(--color-light);
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: var(--color-primary);
+            color: var(--color-light);
+            border-radius: 5px;
+        }
+
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+      
+        .header {
+            background-color: var(--color-medium);
+            color: var(--color-light);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        
+        .card {
+            background-color: var(--color-medium);
+            border: none;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            border-radius: 15px 15px 0 0;
+            padding: 20px;
+        }
+
+        .card-body {
+            color: var(--color-light);
+            padding: 25px;
+        }
+
+        .card-title {
+            color: var(--color-gold);
+        }
+
+       
+        .btn-primary {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: var(--color-light);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-light-hover);
+            border-color: var(--color-light-hover);
+        }
+
+        
+        .footer {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        
+        .table {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table th, .table td {
+            border: 1px solid var(--color-medium);
+            padding: 12px;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: var(--color-table-header);
+            color: var(--color-light);
+        }
+
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: var(--color-table-row);
+        }
+
+        .table-striped tbody tr:hover {
+            background-color: var(--color-table-hover);
+        }
+
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        
+        .form-container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        
+        .form-row {
+            display: flex;
+            gap: 30px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }

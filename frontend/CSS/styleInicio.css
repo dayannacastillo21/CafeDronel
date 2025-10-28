@@ -1,0 +1,212 @@
+
+body {
+  background-color: #1e1b16;
+  color: #f5f2e7;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+.navbar {
+  background-color: #3c2a21 !important;
+}
+.navbar-brand {
+  color: #f5d7a1 !important;
+  font-weight: bold;
+}
+.navbar-brand:hover {
+  color: #ffe0b5 !important;
+}
+.nav-link {
+  color: #f5f2e7 !important;
+  transition: color 0.3s;
+}
+.nav-link:hover {
+  color: #d4a373 !important;
+}
+.dropdown-menu {
+  background-color: #3b2f2f;
+}
+.dropdown-item {
+  color: #f5f2e7;
+}
+.dropdown-item:hover {
+  background-color: #5a3d2b;
+  color: #ffe0b5;
+}
+
+
+.carousel-item { 
+    min-height: 420px; 
+    height: 90vh; 
+    overflow: hidden; 
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+    display: block;
+}
+.carousel-caption {
+    top: auto;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    left: auto;
+    text-align: right;
+    width: auto;
+    max-width: 520px;
+    padding: 0;
+}
+.carousel-caption .card-overlay {
+    backdrop-filter: blur(6px);
+    background-color: rgba(43,42,40,0.75);
+    border: 1px solid rgba(191,163,111,0.12);
+    border-radius: 12px;
+    padding: 1.6rem;
+}
+
+
+.product-card {
+    background: linear-gradient(145deg, #1e1b16, #3a2f28);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    border: 1px solid rgba(191,163,111,0.1);
+    position: relative;
+}
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.24);
+    border-color:#1e1b16(191,163,111,0.2);
+}
+
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(191,163,111,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    transition: all 0.28s ease;
+    border-radius: 16px;
+    pointer-events: none;
+}
+.product-card:hover .hover-overlay { 
+    opacity: 1; 
+    pointer-events: auto; 
+}
+
+.hover-overlay a { 
+    transform: translateY(10px); 
+    transition: all 0.25s ease; 
+    margin: 0 6px; 
+    border-radius: 50%;
+    width: 52px;
+    height: 52px; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+}
+
+.product-card:hover .hover-overlay a { 
+    transform: translateY(0); 
+}
+
+
+.hero {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(to right, #3b2f2f, #5a3d2b);
+  color: #fff;
+}
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.btn-cafe {
+  background-color: #8b5e34;
+  border: none;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  transition: background 0.3s ease;
+}
+.btn-cafe:hover {
+  background-color: #a47148;
+}
+
+
+.card {
+  background-color: #2a2520;
+  color: #f5f2e7;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card img {
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+footer {
+  background-color: #3b2f2f;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #ccc;
+}
+footer strong {
+  color: #f5d7a1;
+}
+footer p {
+  margin: 4px 0;
+}
+.social-icons a {
+  color: #f5d7a1;
+  margin: 0 10px;
+  font-size: 1.6rem;
+  transition: color 0.3s;
+}
+.social-icons a:hover {
+  color: #fff;
+}
+
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #25d366;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+

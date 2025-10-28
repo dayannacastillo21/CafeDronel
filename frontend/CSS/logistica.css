@@ -1,0 +1,132 @@
+:root { 
+    --color-dark: #2b2a28;       
+    --color-medium: #4a3f35;     
+    --color-light: #e8e5df;      
+    --color-accent: #bfa36f;     
+    --color-gold: #d4b17a;       
+    --color-gold-light: #e6c79b; 
+    --color-soft-brown: #7a6451; 
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+
+    
+    background: linear-gradient(rgba(164, 106, 74, 0.7), rgba(204, 137, 103, 0.7)),
+                url("https://e1.pxfuel.com/desktop-wallpaper/6/984/desktop-wallpaper-backgrounds-for-coffee-shop-summer-and-coffee.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+header {
+    background-color: #281606;
+    color: var(--color-light);
+    text-align: center;
+    padding: 25px 0;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+}
+
+main {
+    max-width: 800px;
+    margin: 30px auto;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.section-card {
+    background-color: #f5f3ed;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+h2 {
+    color: var(--color-medium);
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border-radius: 8px;
+    border: 1px solid var(--color-soft-brown);
+}
+
+input:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 6px var(--color-gold-light);
+}
+
+button {
+    background-color: var(--color-gold);
+    color: var(--color-dark);
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--color-gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.cerrar-btn {
+    width: 100%;
+    margin-top: 20px;
+    background-color: var(--color-medium);
+    color: var(--color-light);
+}
+
+.cerrar-btn:hover {
+    background-color: var(--color-soft-brown);
+    color: var(--color-light);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+table th, table td {
+    border: 1px solid var(--color-soft-brown);
+    padding: 12px;
+    text-align: center;
+}
+
+table th {
+    background-color: var(--color-medium);
+    color: var(--color-light);
+}
+
+table tr:nth-child(even) {
+    background-color: #f2efe8;
+}
+
+table tr:hover {
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+    transition: 0.3s;
+}

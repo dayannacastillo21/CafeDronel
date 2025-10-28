@@ -1,0 +1,110 @@
+ :root {
+      --sidebar-bg: #5b3924;
+      --sidebar-text: #fff;
+      --sidebar-hover: #704930;
+      --main-bg: #f7f5f2;
+      --card-bg: #fff;
+      --color-medium: #5c4a37;
+      --color-dark: #2c1e1f;
+      --color-gold: #f3b13c;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--main-bg);
+      margin: 0;
+    }
+
+    
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 240px;
+      background-color: var(--sidebar-bg);
+      padding: 20px 0;
+      color: var(--sidebar-text);
+    }
+    .sidebar h2 {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+    .sidebar .nav-link {
+      color: var(--sidebar-text);
+      font-size: 1rem;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 6px;
+    }
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background-color: var(--sidebar-hover);
+      color: #fff;
+    }
+
+    
+    .main-content {
+      margin-left: 240px;
+      padding: 20px;
+    }
+
+    
+    .header {
+      background-color: var(--color-medium);
+      padding: 20px 30px;
+      margin-bottom: 25px;
+      border-radius: 12px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-logout {
+      background-color: var(--color-dark);
+      border: none;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .btn-logout:hover {
+      background-color: var(--color-gold);
+      color: black;
+    }
+
+   
+    .card {
+      background-color: var(--card-bg);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .card h4 {
+      color: var(--color-medium);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    
+    .table-container {
+      overflow-x: auto;
+    }
+
+    
+    .footer {
+      background-color: var(--sidebar-bg);
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+      margin-top: 40px;
+      border-radius: 10px;
+    }

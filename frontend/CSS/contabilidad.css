@@ -1,0 +1,226 @@
+:root {
+  --sidebar-bg: #5b3924;
+  --sidebar-text: #fff;
+  --sidebar-hover: #704930;
+  --main-bg: #f7f5f2;
+  --card-bg: #fff;
+  --color-medium: #5c4a37;
+  --color-dark: #fff0f1;
+  --color-gold: #f3b13c;
+}
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  overflow-x: hidden;
+}
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 240px;
+  background-color: var(--sidebar-bg);
+  padding: 20px 0;
+  color: var(--sidebar-text);
+}
+
+.sidebar h2 {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.sidebar .nav-link {
+  color: var(--sidebar-text);
+  font-size: 1rem;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: var(--sidebar-hover);
+  color: #fff;
+}
+
+
+.main-content {
+  margin-left: 220px;
+  padding: 20px;
+}
+
+
+.contabilidad-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-medium);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.contabilidad-header h1 {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contabilidad-header .user-info span {
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.btn-logout {
+  background-color: var(--color-primary);
+  border: none;
+  color: var(--color-light);
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-logout:hover {
+  background-color: var(--color-light-hover);
+}
+
+
+.resumen-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.resumen-card {
+  flex: 1 1 200px;
+  background-color: var(--color-medium);
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.resumen-card:hover {
+  transform: translateY(-5px);
+}
+
+.resumen-icon {
+  font-size: 2.5rem;
+  color: var(--color-gold);
+}
+
+.resumen-info h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.resumen-info p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
+.filtros-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.filtro-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.filtro-group input {
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  width: 150px;
+}
+
+.btn-filtrar, .btn-limpiar {
+  padding: 8px 15px;
+  border-radius: 50px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-filtrar { background-color: var(--color-primary); color: var(--color-light); }
+.btn-filtrar:hover { background-color: var(--color-light-hover); }
+.btn-limpiar { background-color: var(--color-accent); color: var(--color-light); }
+.btn-limpiar:hover { background-color: var(--color-light-hover); }
+
+
+.table-container { overflow-x: auto; }
+
+.ventas-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ventas-table th, .ventas-table td {
+  border: 1px solid var(--color-table-header);
+  padding: 10px;
+  text-align: center;
+}
+
+.ventas-table th { background-color: var(--color-table-header); }
+
+.ventas-table tbody tr:nth-child(odd) { background-color: var(--color-table-row); }
+
+.ventas-table tbody tr:hover { background-color: var(--color-table-hover); }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+
+.graficos-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.grafico-container {
+  flex: 1 1 300px;
+  background-color: var(--color-medium);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+
+.contabilidad-footer {
+  background-color: var(--color-dark);
+  text-align: center;
+  padding: 15px;
+  margin-top: 20px;
+  color: var(--color-light);
+}
+
+
+@media (max-width: 992px) {
+  .main-content { margin-left: 0; padding: 10px; }
+  .sidebar { width: 100%; height: auto; position: relative; padding: 10px 0; }
+  .sidebar ul.nav { flex-direction: row; justify-content: space-around; }
+  .resumen-grid, .graficos-grid { flex-direction: column; }
+}
