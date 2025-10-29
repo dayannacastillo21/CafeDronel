@@ -1,9 +1,9 @@
 package com.example.backend_cafedronel.controller;
 
-import org.springframework.web.bind.annotation.*;
 import com.example.backend_cafedronel.model.Producto;
 import com.example.backend_cafedronel.repository.ProductoRepository;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
@@ -11,19 +11,16 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ProductoController {
 
-    private final ProductoRepository repo;
-
-    public ProductoController(ProductoRepository repo) {
-        this.repo = repo;
-    }
+    @Autowired
+    private ProductoRepository productoRepository;
 
     @GetMapping
-    public List<Producto> listar() {
-        return repo.findAll();
+    public List<Producto> getAllProductos() {
+        return productoRepository.findAll();
     }
 
-    @GetMapping("/categoria/{categoria}")
-    public List<Producto> porCategoria(@PathVariable String categoria) {
-        return repo.findByCategoria(categoria);
+    @PostMapping
+    public Producto createProducto(@RequestBody Producto producto) {
+        return productoRepository.save(producto);
     }
 }
