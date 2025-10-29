@@ -11,10 +11,9 @@
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
- 
+  
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-
-   <link rel="stylesheet" href="../CSS/logisticapedidos.css">
+  <link rel="stylesheet" href="../CSS/pedidos.css">
 </head>
 <body>
 
@@ -22,25 +21,25 @@
   <div class="sidebar">
     <h2><i class="bi bi-cup-hot"></i> CaféAdmin</h2>
     <ul class="nav flex-column px-2">
-      <li><a class="nav-link active" href="logistica.html"><i class="bi bi-person-badge"></i> Logistica</a></li>
+      <li><a class="nav-link active" href="logistica.html"><i class="bi bi-person-badge"></i> Logística</a></li>
       <li><a class="nav-link" href="logisticaDashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-      <li><a class="nav-link" href="logisticaProductos.html"><i class="bi bi-speedometer2"></i> Productos</a></li>
+      <li><a class="nav-link" href="logisticaProductos.html"><i class="bi bi-box"></i> Productos</a></li>
       <li><a class="nav-link" href="logisticaInventario.html"><i class="bi bi-archive"></i> Inventario</a></li>
       <li><a class="nav-link" href="logisticaPedidos.html"><i class="bi bi-bag"></i> Pedidos</a></li>
-      <li><a class="nav-link" href="logisticaReportes.html"><i class="bi bi-bag"></i> Reportes</a></li>
+      <li><a class="nav-link" href="logisticaReportes.html"><i class="bi bi-clipboard-data"></i> Reportes</a></li>
     </ul>
   </div>
 
 
  
   <div class="main-content">
-    
+  
     <div class="mb-4">
       <h1 class="fw-bold">Pedidos</h1>
       <p class="text-muted">Gestión de pedidos de clientes</p>
     </div>
 
-  
+   
     <div class="row g-3 mb-4">
       <div class="col-md-3">
         <div class="card p-3">
@@ -54,6 +53,7 @@
           <h3 id="totalPendientes" class="fw-bold text-warning"></h3>
         </div>
       </div>
+  
       <div class="col-md-3">
         <div class="card p-3">
           <h6 class="text-muted">Completados</h6>
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    
+   
     <div class="card">
       <div class="card-header bg-white">
         <h5 class="mb-0">Lista de Pedidos</h5>
@@ -86,9 +86,41 @@
     </div>
   </div>
 
+  <!-- Modal Detalles de Pedido -->
+<div class="modal fade" id="detallePedidoModal" tabindex="-1" aria-labelledby="detallePedidoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detallePedidoModalLabel">Detalles del Pedido</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="detallePedidoBody">
+            <!-- Aquí se llenarán los detalles dinámicamente -->
+          </tbody>
+        </table>
+        <p class="text-end fw-bold" id="detallePedidoTotal">Total: S/ 0.00</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+ 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
- <script src="../JS/logistica.pedidos.js"></script>
+  <script src="../JS/pedidos.js"></script>
 </body>
 </html>
