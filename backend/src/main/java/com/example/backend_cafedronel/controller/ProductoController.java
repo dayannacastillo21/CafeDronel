@@ -30,18 +30,23 @@ public class ProductoController {
 
     @PostMapping
     public Producto crear(@RequestBody Producto producto) {
+        producto.setImagen(null);
+        producto.setDestacado(false);
+        producto.setActivo(true);
         return repo.save(producto);
     }
 
     @PutMapping("/{id}")
     public Producto actualizar(@PathVariable Integer id, @RequestBody Producto productoActualizado) {
         Optional<Producto> productoExistente = repo.findById(id);
+
         if (productoExistente.isPresent()) {
             Producto p = productoExistente.get();
             p.setNombre(productoActualizado.getNombre());
+            p.setDescripcion(productoActualizado.getDescripcion());
+            p.setTamano(productoActualizado.getTamano());
             p.setPrecio(productoActualizado.getPrecio());
             p.setCategoria(productoActualizado.getCategoria());
-            p.setDescripcion(productoActualizado.getDescripcion());
             return repo.save(p);
         } else {
             return null;

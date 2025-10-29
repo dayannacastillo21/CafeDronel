@@ -1,6 +1,7 @@
 package com.example.backend_cafedronel.model;
 
 import jakarta.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "productos")
@@ -11,57 +12,58 @@ public class Producto {
     private Integer id;
 
     private String nombre;
-    private String categoria;
+
     private Double precio;
+
+    private String categoria;
+
     private String descripcion;
 
-    public Producto() {}
+    @Column(name = "tamaño")
+    private String tamano;
 
-    public Producto(Integer id, String nombre, String categoria, Double precio, String descripcion) {
-        this.id = id;
-        this.nombre = nombre;
-        this.categoria = categoria;
-        this.precio = precio;
-        this.descripcion = descripcion;
-    }
+    private String imagen;
 
-    public Integer getId() {
-        return id;
-    }
+    private Boolean destacado;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private Boolean activo;
 
-    public String getNombre() {
-        return nombre;
-    }
+    @Column(name = "fecha_creacion")
+    private Timestamp fechaCreacion;
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    @Column(name = "fecha_actualizacion")
+    private Timestamp fechaActualizacion;
 
-    public String getCategoria() {
-        return categoria;
-    }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public Double getPrecio() {
-        return precio;
-    }
+    public Double getPrecio() { return precio; }
+    public void setPrecio(Double precio) { this.precio = precio; }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
+    public String getCategoria() { return categoria; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public String getTamano() { return tamano; }
+    public void setTamano(String tamano) { this.tamano = tamano; }
+
+    public String getImagen() { return imagen; }
+    public void setImagen(String imagen) { this.imagen = imagen; }
+
+    public Boolean getDestacado() { return destacado; }
+    public void setDestacado(Boolean destacado) { this.destacado = destacado; }
+
+    public Boolean getActivo() { return activo; }
+    public void setActivo(Boolean activo) { this.activo = activo; }
+
+    public Timestamp getFechaCreacion() { return fechaCreacion; }
+    public void setFechaCreacion(Timestamp fechaCreacion) { this.fechaCreacion = fechaCreacion; }
+
+    public Timestamp getFechaActualizacion() { return fechaActualizacion; }
+    public void setFechaActualizacion(Timestamp fechaActualizacion) { this.fechaActualizacion = fechaActualizacion; }
 }
