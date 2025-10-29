@@ -14,6 +14,7 @@ public class InventarioController {
     @Autowired
     private InventarioRepository inventarioRepository;
 
+    // Listar inventario
     @GetMapping("/listar")
     public Map<String, Object> listarInventario() {
         Map<String, Object> response = new HashMap<>();
@@ -28,6 +29,7 @@ public class InventarioController {
         return response;
     }
 
+    // Agregar producto
     @PostMapping("/agregar")
     public Map<String, Object> agregarProducto(@RequestBody Inventario inventario) {
         Map<String, Object> response = new HashMap<>();
@@ -42,6 +44,7 @@ public class InventarioController {
         return response;
     }
 
+    // Editar producto
     @PutMapping("/editar/{id}")
     public Map<String, Object> editarProducto(@PathVariable Integer id, @RequestBody Inventario actualizado) {
         Map<String, Object> response = new HashMap<>();
@@ -71,6 +74,7 @@ public class InventarioController {
         return response;
     }
 
+    // Eliminar producto
     @DeleteMapping("/eliminar/{id}")
     public Map<String, Object> eliminarProducto(@PathVariable Integer id) {
         Map<String, Object> response = new HashMap<>();
@@ -86,6 +90,30 @@ public class InventarioController {
         } catch (Exception e) {
             response.put("success", false);
             response.put("message", "Error al eliminar producto: " + e.getMessage());
+        }
+        return response;
+    }
+
+    @PutMapping("/{id}/restar/{cantidad}")
+    public Map<String, Object> restarStock(@PathVariable Integer id, @PathVariable int cantidad) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Optional<Inventario> optionalInventario = inventarioRepository.findById(id);
+            if (optionalInventario.isPresent()) {
+                Inventario inventario = optionalInventario.get();
+                int nuevoStock = inventario.getCantidad() - cantidad;
+                inventario.setCantidad(Math.max(nuevoStock, 0));
+                inventarioRepository.save(inventario);
+                response.put("success", true);
+                response.put("message", "Stock actualizado correctamente.");
+                response.put("data", inventario);
+            } else {
+                response.put("success", false);
+                response.put("message", "Producto con ID " + id + " no encontrado.");
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Error al restar stock: " + e.getMessage());
         }
         return response;
     }

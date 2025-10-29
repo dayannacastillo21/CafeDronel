@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/productos";
+const API_URL = "http://localhost:8087/productos";
 
 document.addEventListener("DOMContentLoaded", async () => {
     await cargarProductos();
@@ -36,18 +36,16 @@ function renderProductos(productos) {
                 <td>
                     <div class="d-flex justify-content-center gap-2">
                         <button class="btn btn-sm btn-outline-secondary btn-editar" data-id="${prod.id}">
-                            <i class="bi bi-pencil"></i>
+                            <i class="bi bi-pencil"></i> Editar
                         </button>
                         <button class="btn btn-sm btn-outline-danger btn-eliminar" data-id="${prod.id}">
-                            <i class="bi bi-trash"></i>
+                            <i class="bi bi-trash"></i> Eliminar
                         </button>
                     </div>
                 </td>
             </tr>
         `;
     });
-
-    agregarEventosBotones();
 }
 
 function agregarEventosBotones() {
@@ -181,5 +179,53 @@ document.getElementById("guardarProducto").addEventListener("click", async () =>
     } catch (error) {
         console.error("Error al agregar producto:", error);
         alert("Hubo un problema al agregar el producto.");
+    }
+});
+
+document.addEventListener("click", async (e) => {
+    // --- EDITAR ---
+    if (e.target.closest(".btn-editar")) {
+        const btn = e.target.closest(".btn-editar");
+        const id = btn.dataset.id;
+
+        console.log("EDITAR producto ID:", id);
+
+        try {
+            const res = await fetch(`${API_URL}/${id}`);
+            if (!res.ok) throw new Error(`Error al obtener producto ${id}`);
+            const prod = await res.json();
+
+            // Rellenar el formulario del modal
+            document.getElementById("idEditar").value = prod.id;
+            document.getElementById("nombreEditar").value = prod.nombre;
+            document.getElementById("descripcionEditar").value = prod.descripcion || "";
+            document.getElementById("tamanoEditar").value = prod.tamano || "";
+            document.getElementById("precioEditar").value = prod.precio;
+            document.getElementById("categoriaEditar").value = prod.categoria;
+
+            // Mostrar el modal
+            const modalEditar = new bootstrap.Modal(document.getElementById("modalEditar"));
+            modalEditar.show();
+        } catch (error) {
+            console.error("Error al cargar producto:", error);
+            alert("No se pudo cargar la información del producto.");
+        }
+    }
+
+    // --- ELIMINAR ---
+    if (e.target.closest(".btn-eliminar")) {
+        const btn = e.target.closest(".btn-eliminar");
+        const id = btn.dataset.id;
+
+        if (confirm("¿Seguro que deseas eliminar este producto?")) {
+            try {
+                const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+                if (!res.ok) throw new Error("Error al eliminar");
+                alert("Producto eliminado correctamente.");
+                cargarProductos();
+            } catch (error) {
+                console.error("Error al eliminar producto:", error);
+            }
+        }
     }
 });

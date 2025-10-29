@@ -106,7 +106,7 @@
 
         async function cargarInventarioDesdeBackend() {
             try {
-                const response = await fetch("http://localhost:8080/api/inventario");
+                const response = await fetch("http://localhost:8087/api/inventario");
                 if (!response.ok) throw new Error("Error al obtener inventario");
                 const data = await response.json();
                 inventario = data.map(item => ({
@@ -236,11 +236,12 @@
             return { valido: faltantes.length === 0, faltantes };
         }
 
-        function confirmarEnvio() {
+        async function confirmarEnvio() {
             if (carrito.length === 0) {
                 showMessage('El carrito está vacío. Agrega productos antes de confirmar.', 'error');
                 return;
             }
+
             const resultado = validarStockSolicitud();
             if (!resultado.valido) {
                 const list = resultado.faltantes.map(f => `${f.nombre} — solicitado: ${f.solicitado}, disponible: ${f.disponible}`).join('\n');
@@ -250,16 +251,30 @@
                 return;
             }
 
+            for (const item of carrito) {
+                try {
+                    await fetch(`http://localhost:8087/api/inventario/${item.id}/restar/${item.cantidad}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" }
+                    });
+                    logMessage(`Stock actualizado en BD para ${item.nombre} (-${item.cantidad})`);
+                } catch (err) {
+                    console.error(err);
+                    logMessage(`Error al actualizar ${item.nombre} en BD`);
+                }
+            }
+
             carrito.forEach(item => {
                 const productoInvent = inventario.find(p => p.id === item.id);
                 productoInvent.stock -= item.cantidad;
             });
 
-            logMessage(`Envío confirmado. Descontado: ${carrito.map(i => i.nombre + ' x' + i.cantidad).join(', ')}`);
+            logMessage(`Envío confirmado. Stock actualizado en BD.`);
             renderInventory();
             clearCart();
-            showMessage('Envío confirmado y stock actualizado.', 'success');
+            showMessage('Envío confirmado y stock actualizado en la base de datos.', 'success');
         }
+
 
         init();
 
