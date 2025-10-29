@@ -106,14 +106,21 @@
 
         async function cargarInventarioDesdeBackend() {
             try {
-                const response = await fetch("http://localhost:8087/api/inventario");
+                // Usa el nuevo endpoint que devuelve "success" y "data"
+                const response = await fetch("http://localhost:8080/api/inventario/listar");
                 if (!response.ok) throw new Error("Error al obtener inventario");
-                const data = await response.json();
-                inventario = data.map(item => ({
-                    id: item.id,
-                    nombre: item.nombreInsumo,
-                    stock: item.cantidad
-                }));
+
+                const result = await response.json();
+                // Ajusta según la nueva estructura
+                if (result.success && Array.isArray(result.data)) {
+                    inventario = result.data.map(item => ({
+                        id: item.id,
+                        nombre: item.nombreInsumo,
+                        stock: item.cantidad
+                    }));
+                } else {
+                    throw new Error("Respuesta del servidor inválida");
+                }
             } catch (error) {
                 console.error(error);
                 showMessage(" No se pudo conectar con el backend.", "error");
@@ -253,7 +260,7 @@
 
             for (const item of carrito) {
                 try {
-                    await fetch(`http://localhost:8087/api/inventario/${item.id}/restar/${item.cantidad}`, {
+                    await fetch(`http://localhost:8080/api/inventario/${item.id}/restar/${item.cantidad}`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" }
                     });

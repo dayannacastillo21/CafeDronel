@@ -8,13 +8,19 @@ import com.example.backend_cafedronel.repository.InventarioRepository;
 
 @RestController
 @RequestMapping("/api/inventario")
-@CrossOrigin(origins = "*") // Permitir cualquier origen durante desarrollo
+@CrossOrigin(origins = "*")
 public class InventarioController {
 
     @Autowired
     private InventarioRepository inventarioRepository;
 
-    // Listar inventario
+    // ✅ Tu endpoint antiguo (para validar_stock.html)
+    @GetMapping
+    public List<Inventario> listarInventarioSimple() {
+        return inventarioRepository.findAll();
+    }
+
+    // ✅ El de tu compañera
     @GetMapping("/listar")
     public Map<String, Object> listarInventario() {
         Map<String, Object> response = new HashMap<>();
@@ -29,7 +35,6 @@ public class InventarioController {
         return response;
     }
 
-    // Agregar producto
     @PostMapping("/agregar")
     public Map<String, Object> agregarProducto(@RequestBody Inventario inventario) {
         Map<String, Object> response = new HashMap<>();
@@ -44,7 +49,6 @@ public class InventarioController {
         return response;
     }
 
-    // Editar producto
     @PutMapping("/editar/{id}")
     public Map<String, Object> editarProducto(@PathVariable Integer id, @RequestBody Inventario actualizado) {
         Map<String, Object> response = new HashMap<>();
@@ -52,14 +56,12 @@ public class InventarioController {
             Optional<Inventario> optionalInventario = inventarioRepository.findById(id);
             if (optionalInventario.isPresent()) {
                 Inventario inventario = optionalInventario.get();
-
                 inventario.setNombreInsumo(actualizado.getNombreInsumo());
                 inventario.setCantidad(actualizado.getCantidad());
                 inventario.setUnidad(actualizado.getUnidad());
                 inventario.setStockMinimo(actualizado.getStockMinimo());
                 inventario.setPrecioUnitario(actualizado.getPrecioUnitario());
                 inventario.setProveedor(actualizado.getProveedor());
-
                 inventarioRepository.save(inventario);
                 response.put("success", true);
                 response.put("message", "Producto actualizado correctamente.");
@@ -74,7 +76,6 @@ public class InventarioController {
         return response;
     }
 
-    // Eliminar producto
     @DeleteMapping("/eliminar/{id}")
     public Map<String, Object> eliminarProducto(@PathVariable Integer id) {
         Map<String, Object> response = new HashMap<>();
@@ -94,6 +95,7 @@ public class InventarioController {
         return response;
     }
 
+    // ✅ Restar stock (tu método)
     @PutMapping("/{id}/restar/{cantidad}")
     public Map<String, Object> restarStock(@PathVariable Integer id, @PathVariable int cantidad) {
         Map<String, Object> response = new HashMap<>();
