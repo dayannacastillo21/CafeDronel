@@ -1,5 +1,6 @@
 package com.example.backend_cafedronel.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.backend_cafedronel.model.Producto;
 import com.example.backend_cafedronel.repository.ProductoRepository;
@@ -34,6 +35,13 @@ public class ProductoController {
         producto.setDestacado(false);
         producto.setActivo(true);
         return repo.save(producto);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Producto> obtenerPorId(@PathVariable Integer id) {
+        return repo.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
