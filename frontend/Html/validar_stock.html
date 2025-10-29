@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CafeDronel - Validación de Stock</title>
+    <link rel="stylesheet" href="../CSS/validar_stock.css">
+</head>
+
+<body>
+    <header>
+        <h1>CafeDronel — Validación de Disponibilidad de Stock </h1>
+        <p class="lead">Valida el inventario antes de confirmar envíos.</p>
+    </header>
+
+    <main class="grid">
+        <section class="card" aria-labelledby="form-title">
+            <h2 id="form-title" style="font-size:16px;margin:0 0 8px 0;">Crear solicitud de envío</h2>
+
+            <div class="controls" style="margin-bottom:12px;">
+                <div style="flex:1">
+                    <label class="small">Producto</label>
+                    <select id="select-product" aria-label="Seleccionar producto"></select>
+                </div>
+                <div style="width:120px;">
+                    <label class="small">Cantidad</label>
+                    <input id="input-qty" type="number" min="1" value="1" aria-label="Cantidad solicitada" />
+                </div>
+                <div style="width:120px; display:flex; align-items:flex-end;">
+                    <button id="btn-add" class="btn-primary" title="Agregar al carrito">Agregar</button>
+                </div>
+            </div>
+
+            <div id="messages"></div>
+
+            <h3 style="margin-top:8px;font-size:14px;">Carrito (Solicitud)</h3>
+            <div style="max-height: 260px; overflow:auto; margin-bottom:8px;">
+                <table id="cart-table" role="table" aria-label="Carrito de productos">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Stock actual</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div style="display:flex; gap:8px; justify-content:flex-end;">
+                <button id="btn-clear" class="btn-ghost">Limpiar</button>
+                <button id="btn-confirm" class="btn-success">Confirmar envío</button>
+            </div>
+
+            <p class="note">Al confirmar, el sistema validará que exista stock suficiente. Si todo está correcto, se
+                actualizará el inventario.</p>
+        </section>
+
+        <aside class="card" aria-labelledby="inv-title">
+            <h2 id="inv-title" style="font-size:16px;margin:0 0 8px 0;">Inventario</h2>
+            <table id="inventory-table" aria-label="Tabla de inventario">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>ID</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <div style="margin-top:12px;">
+                <h3 style="font-size:14px;margin:0 0 6px 0;">Registro de validaciones</h3>
+                <div id="log" class="small-muted" style="max-height:180px; overflow:auto; padding-top:6px;"></div>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="small-muted">Demo RF05 • Validación de stock antes de confirmar envío • CafeDronel</div>
+    </footer>
+
+    <script>
+        let inventario = [];
+        let carrito = [];
+
+        const selectProduct = document.getElementById('select-product');
+        const inputQty = document.getElementById('input-qty');
+        const btnAdd = document.getElementById('btn-add');
+        const cartTableBody = document.querySelector('#cart-table tbody');
+        const inventoryTableBody = document.querySelector('#inventory-table tbody');
+        const btnConfirm = document.getElementById('btn-confirm');
+        const btnClear = document.getElementById('btn-clear');
+        const messages = document.getElementById('messages');
+        const log = document.getElementById('log');
+
+        async function init() {
+            await cargarInventarioDesdeBackend();
+            renderInventory();
+            renderCart();
+            attachEvents();
+            logMessage("✅ Sistema listo. Inventario cargado desde la base de datos.");
+        }
+
+        async function cargarInventarioDesdeBackend() {
+            try {
+                const response = await fetch("http://localhost:8087/api/inventario");
+                if (!response.ok) throw new Error("Error al obtener inventario");
+                const data = await response.json();
+                inventario = data.map(item => ({
+                    id: item.id,
+                    nombre: item.nombreInsumo,
+                    stock: item.cantidad
+                }));
+            } catch (error) {
+                console.error(error);
+                showMessage("❌ No se pudo conectar con el backend.", "error");
+            }
+        }
+
+        function renderProductOptions() {
+            selectProduct.innerHTML = '';
+            inventario.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.id;
+                opt.textContent = `${p.nombre} (stock: ${p.stock})`;
+                selectProduct.appendChild(opt);
+            });
+        }
+
+        function renderInventory() {
+            inventoryTableBody.innerHTML = '';
+            inventario.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${p.nombre}</td><td>${p.id}</td><td>${p.stock}</td>`;
+                inventoryTableBody.appendChild(tr);
+            });
+            renderProductOptions();
+        }
+
+        function renderCart() {
+            cartTableBody.innerHTML = '';
+            if (carrito.length === 0) {
+                cartTableBody.innerHTML = `<tr><td colspan="4" class="muted">El carrito está vacío.</td></tr>`;
+                return;
+            }
+            carrito.forEach((item, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+      <td>${item.nombre}</td>
+      <td>${item.cantidad}</td>
+      <td>${item.stock}</td>
+      <td style="text-align:right;">
+        <button class="btn-ghost" data-idx="${idx}" style="padding:6px 8px;">Eliminar</button>
+      </td>`;
+                cartTableBody.appendChild(tr);
+            });
+
+            cartTableBody.querySelectorAll('button[data-idx]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = Number(e.currentTarget.getAttribute('data-idx'));
+                    carrito.splice(idx, 1);
+                    renderCart();
+                });
+            });
+        }
+
+        function showMessage(text, type = 'info') {
+            messages.innerHTML = `<div class="msg ${type === 'error' ? 'msg-error' : (type === 'success' ? 'msg-success' : 'msg-info')}">${text}</div>`;
+            setTimeout(() => {
+                if (messages.firstChild) messages.removeChild(messages.firstChild);
+            }, 6000);
+        }
+
+        function addToCart() {
+            const prodId = Number(selectProduct.value);
+            const qty = parseInt(inputQty.value, 10) || 0;
+            if (!prodId || qty <= 0) {
+                showMessage('Ingrese una cantidad válida.', 'error');
+                return;
+            }
+            const producto = inventario.find(p => p.id === prodId);
+            if (!producto) {
+                showMessage('Producto no encontrado.', 'error');
+                return;
+            }
+            const existente = carrito.find(c => c.id === producto.id);
+            if (existente) {
+                existente.cantidad += qty;
+            } else {
+                carrito.push({ id: producto.id, nombre: producto.nombre, cantidad: qty, stock: producto.stock });
+            }
+            inputQty.value = 1;
+            renderCart();
+            showMessage('Producto agregado al carrito.', 'info');
+        }
+
+        function clearCart() {
+            carrito = [];
+            renderCart();
+            showMessage('Carrito limpiado.', 'info');
+        }
+
+        function attachEvents() {
+            btnAdd.addEventListener('click', addToCart);
+            btnClear.addEventListener('click', clearCart);
+            btnConfirm.addEventListener('click', confirmarEnvio);
+            inputQty.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') addToCart();
+            });
+        }
+
+        function logMessage(text) {
+            const d = new Date();
+            const line = document.createElement('div');
+            line.textContent = `[${d.toLocaleString()}] ${text}`;
+            log.prepend(line);
+        }
+
+        function validarStockSolicitud() {
+            const faltantes = [];
+            carrito.forEach(item => {
+                const productoInvent = inventario.find(p => p.id === item.id);
+                const disponible = productoInvent ? productoInvent.stock : 0;
+                if (item.cantidad > disponible) {
+                    faltantes.push({
+                        id: item.id,
+                        nombre: item.nombre,
+                        solicitado: item.cantidad,
+                        disponible: disponible
+                    });
+                }
+            });
+            return { valido: faltantes.length === 0, faltantes };
+        }
+
+        function confirmarEnvio() {
+            if (carrito.length === 0) {
+                showMessage('El carrito está vacío. Agrega productos antes de confirmar.', 'error');
+                return;
+            }
+            const resultado = validarStockSolicitud();
+            if (!resultado.valido) {
+                const list = resultado.faltantes.map(f => `${f.nombre} — solicitado: ${f.solicitado}, disponible: ${f.disponible}`).join('\n');
+                showMessage('No hay stock suficiente para algunos productos.', 'error');
+                logMessage('❗ Falta stock: ' + resultado.faltantes.map(f => `${f.nombre} (sol ${f.solicitado}/disp ${f.disponible})`).join('; '));
+                alert('❗ Productos sin stock suficiente:\n\n' + list);
+                return;
+            }
+
+            carrito.forEach(item => {
+                const productoInvent = inventario.find(p => p.id === item.id);
+                productoInvent.stock -= item.cantidad;
+            });
+
+            logMessage(`✅ Envío confirmado. Descontado: ${carrito.map(i => i.nombre + ' x' + i.cantidad).join(', ')}`);
+            renderInventory();
+            clearCart();
+            showMessage('✅ Envío confirmado y stock actualizado.', 'success');
+        }
+
+        init();
+
+    </script>
+</body>
+
+</html>
