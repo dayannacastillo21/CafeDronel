@@ -106,7 +106,7 @@
 
         async function cargarInventarioDesdeBackend() {
             try {
-                const response = await fetch("http://localhost:8087/api/inventario");
+                const response = await fetch("http://localhost:8080/api/inventario");
                 if (!response.ok) throw new Error("Error al obtener inventario");
                 const data = await response.json();
                 inventario = data.map(item => ({
