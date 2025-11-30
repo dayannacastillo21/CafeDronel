@@ -1,0 +1,99 @@
+:root {
+    --sidebar-bg: #5b3924;
+    --sidebar-text: #fff;
+    --sidebar-hover: #704930;
+    --main-bg: #f7f5f2;
+    --card-bg: #fff;
+    --accent: #a5662b;
+    --success: #198754;
+    --danger: #dc3545;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--main-bg);
+    margin: 0;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    background-color: var(--sidebar-bg);
+    padding: 20px 0;
+    color: var(--sidebar-text);
+}
+
+.sidebar h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.sidebar .nav-link {
+    color: var(--sidebar-text);
+    font-size: 1rem;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: var(--sidebar-hover);
+    color: #fff;
+}
+
+
+.main-content {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-main h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #2c2c2c;
+}
+
+.header-main small {
+    color: #6c757d;
+}
+
+
+.card {
+    background-color: var(--card-bg);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.card h5 {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.card h3 {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #2c2c2c;
+}
+
+.card span {
+    font-size: 0.85rem;
+}

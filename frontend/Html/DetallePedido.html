@@ -1,0 +1,30 @@
+<body>
+  <h1>Detalle del Pedido</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody id="detalleTable"></tbody>
+  </table>
+
+  <script>
+    const detalles = JSON.parse(localStorage.getItem("detallePedido")) || [];
+    const tbody = document.getElementById("detalleTable");
+
+    detalles.forEach(d => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${d.producto}</td>
+          <td>${d.cantidad}</td>
+          <td>S/ ${d.precio.toFixed(2)}</td>
+          <td>S/ ${d.subtotal.toFixed(2)}</td>
+        </tr>
+      `;
+    });
+  </script>
+</body>

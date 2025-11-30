@@ -1,0 +1,59 @@
+:root {
+      --sidebar-bg: #5b3924;
+      --sidebar-text: #fff;
+      --sidebar-hover: #704930;
+      --main-bg: #f7f5f2;
+      --card-bg: #fff;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--main-bg);
+      margin: 0;
+    }
+
+    
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 240px;
+      background-color: var(--sidebar-bg);
+      padding: 20px 0;
+      color: var(--sidebar-text);
+    }
+
+    .sidebar h2 {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .sidebar .nav-link {
+      color: var(--sidebar-text);
+      font-size: 1rem;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 6px;
+    }
+
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background-color: var(--sidebar-hover);
+      color: #fff;
+    }
+
+    
+    .main-content {
+      margin-left: 240px;
+      padding: 20px;
+    }
+
+    .progress {
+      height: 6px;
+    }

@@ -1,0 +1,103 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --card-bg: #ffffff;
+  --muted: #666;
+  --accent: #2b7a78;
+  --danger: #e94b35;
+  --success: #2e7d32;
+  --glass: rgba(0,0,0,0.04);
+}
+
+body {
+  margin: 16px;
+  background: linear-gradient(180deg, #f6f9fb 0%, #ffffff 100%);
+  color: #222;
+}
+
+header { margin-bottom: 18px; }
+h1 { font-size: 20px; margin: 0 0 6px 0; }
+p.lead { margin: 0; color: var(--muted); font-size: 14px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 18px;
+  align-items: start;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(32,32,32,0.05);
+  border: 1px solid var(--glass);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th { font-weight: 600; font-size: 13px; color: #333; }
+
+.small { font-size: 13px; color: var(--muted); }
+.muted { color: var(--muted); }
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+select, input[type="number"] {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.btn-primary { background: var(--accent); color: white; }
+.btn-ghost { background: transparent; border: 1px solid #ddd; color: #333; }
+.btn-danger { background: var(--danger); color: white; }
+.btn-success { background: var(--success); color: white; }
+
+.note { font-size: 13px; color: #444; margin-top: 8px; }
+.inline { display:inline-block; }
+
+.msg {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.msg-error { background: rgba(233,75,53,0.08); color: var(--danger); border: 1px solid rgba(233,75,53,0.12); }
+.msg-success { background: rgba(46,125,50,0.08); color: var(--success); border: 1px solid rgba(46,125,50,0.12); }
+.msg-info { background: rgba(43,122,120,0.06); color: var(--accent); border: 1px solid rgba(43,122,120,0.08); }
+
+footer { margin-top: 16px; font-size: 13px; color: var(--muted); }
+.small-muted { font-size: 12px; color: #888; }
+
+@media (max-width: 880px) {
+  .grid { grid-template-columns: 1fr; }
+  .controls { flex-direction: column; align-items: stretch; }
+}
