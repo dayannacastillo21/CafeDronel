@@ -12,20 +12,15 @@ public class Producto {
     private Integer id;
 
     private String nombre;
-
     private Double precio;
-
     private String categoria;
-
     private String descripcion;
 
     @Column(name = "tamaño")
     private String tamano;
 
     private String imagen;
-
     private Boolean destacado;
-
     private Boolean activo;
 
     @Column(name = "fecha_creacion")
@@ -34,6 +29,7 @@ public class Producto {
     @Column(name = "fecha_actualizacion")
     private Timestamp fechaActualizacion;
 
+    // Getters y Setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
