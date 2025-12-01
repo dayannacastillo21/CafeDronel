@@ -21,6 +21,11 @@ public class Venta {
 
     @Column(name = "metodo_pago")
     private String metodoPago;
+    // Detalles adicionales de la venta
+    private String producto;
+    private Integer cantidad;
+    @Column(name = "precio_unitario")
+    private Double precioUnitario;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -39,4 +44,13 @@ public class Venta {
 
     public String getMetodoPago() { return metodoPago; }
     public void setMetodoPago(String metodoPago) { this.metodoPago = metodoPago; }
+
+    public String getProducto() { return producto; }
+    public void setProducto(String producto) { this.producto = producto; }
+
+    public Integer getCantidad() { return cantidad; }
+    public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
+
+    public Double getPrecioUnitario() { return precioUnitario; }
+    public void setPrecioUnitario(Double precioUnitario) { this.precioUnitario = precioUnitario; }
 }

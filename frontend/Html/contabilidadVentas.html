@@ -36,12 +36,12 @@
   
   <div class="main-content">
   
-    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
         <h1 class="h3 fw-bold">Ventas</h1>
         <p class="text-muted mb-0">Gestiona y visualiza todas las transacciones</p>
       </div>
-      <button class="btn btn-primary">
+      <button id="btnNuevaVenta" class="btn btn-primary">
         <i class="bi bi-plus-lg"></i> Nueva Venta
       </button>
     </div>
@@ -68,59 +68,54 @@
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td class="fw-medium">V-001</td>
-              <td>2024-03-15</td>
-              <td>Juan Pérez</td>
-              <td>3</td>
-              <td class="fw-bold text-primary">$45.50</td>
-              <td><span class="badge badge-secondary">Efectivo</span></td>
-              <td><button class="btn btn-sm btn-outline-secondary">Ver detalles</button></td>
-            </tr>
-            <tr>
-              <td class="fw-medium">V-002</td>
-              <td>2024-03-15</td>
-              <td>María García</td>
-              <td>2</td>
-              <td class="fw-bold text-primary">$28.00</td>
-              <td><span class="badge badge-secondary">Tarjeta</span></td>
-              <td><button class="btn btn-sm btn-outline-secondary">Ver detalles</button></td>
-            </tr>
-            <tr>
-              <td class="fw-medium">V-003</td>
-              <td>2024-03-15</td>
-              <td>Carlos López</td>
-              <td>5</td>
-              <td class="fw-bold text-primary">$67.30</td>
-              <td><span class="badge badge-secondary">Transferencia</span></td>
-              <td><button class="btn btn-sm btn-outline-secondary">Ver detalles</button></td>
-            </tr>
-            <tr>
-              <td class="fw-medium">V-004</td>
-              <td>2024-03-14</td>
-              <td>Ana Martínez</td>
-              <td>1</td>
-              <td class="fw-bold text-primary">$12.50</td>
-              <td><span class="badge badge-secondary">Efectivo</span></td>
-              <td><button class="btn btn-sm btn-outline-secondary">Ver detalles</button></td>
-            </tr>
-            <tr>
-              <td class="fw-medium">V-005</td>
-              <td>2024-03-14</td>
-              <td>Pedro Sánchez</td>
-              <td>4</td>
-              <td class="fw-bold text-primary">$52.00</td>
-              <td><span class="badge badge-secondary">Tarjeta</span></td>
-              <td><button class="btn btn-sm btn-outline-secondary">Ver detalles</button></td>
-            </tr>
-          </tbody>
+          <tbody id="ventas-body"></tbody>
         </table>
       </div>
     </div>
+  
+  <!-- Modal Nueva Venta -->
+  <div class="modal fade" id="modalNuevaVenta" tabindex="-1" aria-labelledby="modalNuevaVentaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalNuevaVentaLabel">Registrar Nueva Venta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formNuevaVenta">
+            <div class="mb-3">
+              <label for="producto" class="form-label">Producto</label>
+              <input type="text" id="producto" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="cantidad" class="form-label">Cantidad</label>
+              <input type="number" id="cantidad" class="form-control" min="1" value="1" required>
+            </div>
+            <div class="mb-3">
+              <label for="precioUnitario" class="form-label">Precio Unitario (S/)</label>
+              <input type="number" id="precioUnitario" class="form-control" min="0" step="0.01" required>
+            </div>
+            <div class="mb-3">
+              <label for="metodoPago" class="form-label">Método de Pago</label>
+              <select id="metodoPago" class="form-select">
+                <option value="efectivo">Efectivo</option>
+                <option value="tarjeta">Tarjeta</option>
+                <option value="transferencia">Transferencia</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button id="btnGuardarVenta" type="button" class="btn btn-primary">Guardar Venta</button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../JS/contabilidadVentas.js"></script>
 </body>
 </html>
