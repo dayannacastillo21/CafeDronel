@@ -46,27 +46,31 @@
       <form class="row g-3 mt-2">
         <div class="col-md-6">
           <label class="form-label">Nombre del Insumo</label>
-          <input type="text" class="form-control" placeholder="Ej. Café en grano">
+          <input id="input-nombre-insumo" type="text" class="form-control" placeholder="Ej. Café en grano">
         </div>
         <div class="col-md-3">
           <label class="form-label">Cantidad</label>
-          <input type="number" class="form-control" min="0">
+          <input id="input-cantidad" type="number" class="form-control" min="0">
         </div>
         <div class="col-md-3">
           <label class="form-label">Stock Mínimo</label>
-          <input type="number" class="form-control" min="0">
+          <input id="input-stock-minimo" type="number" class="form-control" min="0">
         </div>
         <div class="col-md-6">
           <label class="form-label">Unidad</label>
-          <select class="form-select">
+          <select id="select-unidad" class="form-select">
             <option>Kilogramos</option>
             <option>Litros</option>
             <option>Unidades</option>
             <option>Paquetes</option>
           </select>
         </div>
+        <div class="col-md-6">
+          <label class="form-label">Precio Unitario (S/)</label>
+          <input id="input-precio-unitario" type="number" class="form-control" min="0" step="0.01" placeholder="0.00">
+        </div>
         <div class="col-12">
-          <button type="button" class="btn btn-dark"><i class="bi bi-save"></i> Guardar</button>
+          <button id="btn-guardar-insumo" type="button" class="btn btn-dark"><i class="bi bi-save"></i> Guardar</button>
         </div>
       </form>
     </div>
@@ -85,22 +89,7 @@
               <th>Estado</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Café en grano</td>
-              <td>20</td>
-              <td>kg</td>
-              <td>10</td>
-              <td><span class="text-success fw-bold">En Stock</span></td>
-            </tr>
-            <tr>
-              <td>Leche</td>
-              <td>5</td>
-              <td>lt</td>
-              <td>8</td>
-              <td><span class="text-danger fw-bold">Stock Bajo</span></td>
-            </tr>
-          </tbody>
+          <tbody id="inventario-body"></tbody>
         </table>
       </div>
     </div>
@@ -108,11 +97,7 @@
     
     <div class="card">
       <h4><i class="bi bi-people"></i> Proveedores</h4>
-      <ul class="list-group list-group-flush mt-2">
-        <li class="list-group-item">☕ Café Superior SAC - 📞 987654321 - ✉️ cafe@superior.com</li>
-        <li class="list-group-item">🥛 Lácteos Frescos EIRL - 📞 987654322 - ✉️ ventas@lacteosfrescos.com</li>
-        <li class="list-group-item">🍰 Dulces y Postres SA - 📞 987654323 - ✉️ pedidos@dulcesypostres.com</li>
-      </ul>
+      <ul class="list-group list-group-flush mt-2" id="proveedores-list"></ul>
     </div>
 
   
@@ -153,5 +138,6 @@
       window.location.href = "Admin.html"; 
     }
   </script>
+  <script src="../JS/logistica.js"></script>
 </body>
 </html>

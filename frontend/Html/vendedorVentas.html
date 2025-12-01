@@ -35,26 +35,12 @@
       <button class="btn-logout">Cerrar Sesión</button>
     </div>
 
-    <!-- Registrar venta -->
+    <!-- Registrar venta (botón que abre modal) -->
     <div class="card">
       <h4><i class="bi bi-plus-circle"></i> Registrar Nueva Venta</h4>
-      <form class="row g-3 mt-2">
-        <div class="col-md-6">
-          <label class="form-label">Producto</label>
-          <input type="text" class="form-control" placeholder="Ej. Pastel de chocolate">
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Cantidad</label>
-          <input type="number" class="form-control" min="1" value="1">
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Precio</label>
-          <input type="number" class="form-control" step="0.01" placeholder="0.00">
-        </div>
-        <div class="col-12">
-          <button class="btn btn-dark mt-2"><i class="bi bi-save"></i> Guardar Venta</button>
-        </div>
-      </form>
+      <div class="p-3">
+        <button id="btn-open-modal-venta" class="btn btn-dark"><i class="bi bi-plus-lg"></i> Registrar Venta</button>
+      </div>
     </div>
 
     <!-- Historial de ventas -->
@@ -70,23 +56,50 @@
               <th>Total</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>30/09/2025</td>
-              <td>Pastel de Fresa</td>
-              <td>2</td>
-              <td>$40.00</td>
-            </tr>
-            <tr>
-              <td>29/09/2025</td>
-              <td>Cheesecake</td>
-              <td>1</td>
-              <td>$25.00</td>
-            </tr>
-          </tbody>
+          <tbody id="ventas-body-vendedor"></tbody>
         </table>
       </div>
     </div>
+
+  <!-- Modal Registrar Venta -->
+  <div class="modal fade" id="modalRegistrarVenta" tabindex="-1" aria-labelledby="modalRegistrarVentaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRegistrarVentaLabel">Registrar Venta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formRegistrarVenta">
+            <div class="mb-3">
+              <label for="vproducto" class="form-label">Producto</label>
+              <input id="vproducto" type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="vcantidad" class="form-label">Cantidad</label>
+              <input id="vcantidad" type="number" class="form-control" min="1" value="1" required>
+            </div>
+            <div class="mb-3">
+              <label for="vprecio" class="form-label">Precio Unitario (S/)</label>
+              <input id="vprecio" type="number" class="form-control" step="0.01" min="0" required>
+            </div>
+            <div class="mb-3">
+              <label for="vmetodo" class="form-label">Método de pago</label>
+              <select id="vmetodo" class="form-select">
+                <option value="efectivo">Efectivo</option>
+                <option value="tarjeta">Tarjeta</option>
+                <option value="transferencia">Transferencia</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button id="btn-guardar-venta-vendedor" type="button" class="btn btn-primary">Guardar Venta</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!-- Productos más vendidos -->
     <div class="card">
@@ -105,4 +118,8 @@
   </div>
 
 </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../JS/vendedorVentas.js"></script>
+</body>
+</html>
 </html>
