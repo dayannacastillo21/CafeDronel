@@ -24,4 +24,17 @@ public class VentaController {
     public Venta create(@RequestBody Venta venta) {
         return ventaRepository.save(venta);
     }
+    @GetMapping("/por-mes")
+    public List<Object[]> obtenerVentasPorMes() {
+        return ventaRepository.obtenerVentasPorMes();
+    }
+    @GetMapping("/metodo-pago")
+    public List<Object[]> obtenerVentasPorMetodoPago() {
+        return ventaRepository.obtenerVentasPorMetodoPago();
+    }
+    @GetMapping("/top-categorias")
+    public List<Object[]> obtenerTopCategorias() {
+        return ventaRepository.obtenerTopCategorias();
+    }
+
 }

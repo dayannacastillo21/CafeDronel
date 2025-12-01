@@ -11,7 +11,7 @@ import com.example.backend_cafedronel.repository.PedidoRepository;
 @RestController
 @RequestMapping("/pedidos")
 @CrossOrigin(origins = "*")
-public class PedidoController {
+public class    PedidoController {
 
     private final PedidoRepository pedidoRepository;
 

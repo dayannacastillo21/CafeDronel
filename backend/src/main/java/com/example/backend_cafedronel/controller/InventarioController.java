@@ -14,13 +14,11 @@ public class InventarioController {
     @Autowired
     private InventarioRepository inventarioRepository;
 
-    // ✅ Tu endpoint antiguo (para validar_stock.html)
     @GetMapping
     public List<Inventario> listarInventarioSimple() {
         return inventarioRepository.findAll();
     }
 
-    // ✅ El de tu compañera
     @GetMapping("/listar")
     public Map<String, Object> listarInventario() {
         Map<String, Object> response = new HashMap<>();
@@ -95,7 +93,6 @@ public class InventarioController {
         return response;
     }
 
-    // ✅ Restar stock (tu método)
     @PutMapping("/{id}/restar/{cantidad}")
     public Map<String, Object> restarStock(@PathVariable Integer id, @PathVariable int cantidad) {
         Map<String, Object> response = new HashMap<>();
