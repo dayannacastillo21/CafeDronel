@@ -36,28 +36,79 @@
     </div>
 
     <!-- Registrar venta -->
-    <div class="card">
-      <h4><i class="bi bi-plus-circle"></i> Registrar Nueva Venta</h4>
-      <form class="row g-3 mt-2">
-        <div class="col-md-6">
-          <label class="form-label">Producto</label>
-          <input type="text" class="form-control" placeholder="Ej. Pastel de chocolate">
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Cantidad</label>
-          <input type="number" class="form-control" min="1" value="1">
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Precio</label>
-          <input type="number" class="form-control" step="0.01" placeholder="0.00">
-        </div>
-        <div class="col-12">
-          <button class="btn btn-dark mt-2"><i class="bi bi-save"></i> Guardar Venta</button>
-        </div>
-      </form>
-    </div>
+      <div class="card">
+          <h4><i class="bi bi-plus-circle"></i> Registrar Nueva Venta</h4>
+          <form class="row g-3 mt-2" id="formVenta">
+              <div class="col-md-6">
+                  <label class="form-label">Producto</label>
+                  <input type="text" id="producto" class="form-control" placeholder="Ej. Pastel de chocolate">
+              </div>
+              <div class="col-md-3">
+                  <label class="form-label">Cantidad</label>
+                  <input type="number" id="cantidad" class="form-control" min="1" placeholder="1">
+              </div>
+              <div class="col-md-3">
+                  <label class="form-label">Precio</label>
+                  <input type="number" id="precio" class="form-control" step="0.01" placeholder="0.00">
+              </div>
+              <div class="col-12">
+                  <button class="btn btn-dark mt-2" type="submit">
+                      <i class="bi bi-save"></i> Guardar Venta
+                  </button>
+              </div>
+          </form>
+      </div>
 
-    <!-- Historial de ventas -->
+
+
+
+
+
+
+
+
+
+
+      <div class="card">
+          <h4><i class="bi bi-plus-circle"></i> Editar Venta Registrada</h4>
+          <form class="row g-8 mt-2">
+              <div class="contenedor-tabla">
+                  <table>
+                      <thead>
+                      <tr>
+                          <th>Producto</th>
+                          <th>Cantidad</th>
+                          <th>Precio</th>
+                      </tr>
+                      </thead>
+                      <tbody id="tablaVentas">
+
+                      </tbody>
+                  </table>
+                  <div class="acciones">
+                      <button type="button" class="btn btn-actualizar">Actualizar</button>
+                      <button type="button" class="btn btn-eliminar">Eliminar</button>
+                  </div>
+              </div>
+              <div>
+                  <div class="fila">
+                      <label>Producto</label>
+                      <input id="inputProducto" type="text" class="form-control">
+
+                      <label>Precio</label>
+                      <input id="inputCantidad" type="number" class="form-control">
+
+                      <label>Cantidad</label>
+                      <input id="inputPrecio" type="number" class="form-control">
+
+                  </div>
+              </div>
+
+          </form>
+      </div>
+
+
+      <!-- Historial de ventas -->
     <div class="card">
       <h4><i class="bi bi-clock-history"></i> Historial de Ventas</h4>
       <div class="table-responsive mt-3">
@@ -104,5 +155,6 @@
     </div>
   </div>
 
+  <script src="../JS/vendedorVentas.js"></script>
 </body>
 </html>

@@ -96,3 +96,92 @@
       margin-top: 40px;
       border-radius: 10px;
     }
+
+
+
+    .contenedor-tabla {
+                  display: flex;
+                  background: #2c1e1f;
+                  padding: 10px;
+                  border-radius: 5px;
+              }
+
+              table {
+                  width: 100%;
+                  border-collapse: collapse;
+                  background: #dcdcdc;
+              }
+
+              table th, table td {
+                  padding: 6px;
+                  border: 1px solid #999;
+                  text-align: left;
+              }
+
+              .acciones {
+                  width: 120px;
+                  margin-left: 10px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+              }
+
+              .btn {
+                  padding: 10px;
+                  margin: 5px 0;
+                  border: none;
+                  font-weight: bold;
+                  border-radius: 4px;
+                  cursor: pointer;
+              }
+
+              .btn-actualizar {
+                  background: #4CAF50;
+                  color: white;
+              }
+
+              .btn-eliminar {
+                  background: #e74c3c;
+                  color: white;
+              }
+
+             .btn-actualizar:hover {
+                background:#8FBC8F;
+                color: white;
+                }
+
+             .btn-eliminar:hover {
+                background:#A52A2A ;
+                color: white;
+             }
+
+              .formulario {
+                  background: #c7e3e6;
+                  padding: 15px;
+                  margin-top: 15px;
+                  border-radius: 5px;
+                  color: black;
+              }
+
+              .fila {
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 10px;
+              }
+
+              .fila label {
+                  margin-right: 5px;
+                  width: 70px;
+              }
+
+              .fila input {
+                  margin-right: 20px;
+                  padding: 5px;
+              }
+              #tablaVentas tr.selected {
+                  background-color: #d0e4ff;
+              }
+              .seleccionado {
+                  background-color: #d1ecf1 !important;
+              }
+
